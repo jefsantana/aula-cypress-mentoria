@@ -30,3 +30,5 @@ describe('Orange HRM Tests', () => {
     cy.location('pathname', { timeout: 10000 }).should('equal', '/web/index.php/auth/login');
   });
 });
+
+
