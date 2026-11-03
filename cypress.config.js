@@ -1,12 +1,23 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
-  projectId: '5iubio',
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    reportDir: 'cypress/reports',
+    reportPageTitle: 'Relatório de testes - OrangeHRM',
+    charts: true,
+    embeddedScreenshots: true,
+    inlineAssets: true,
+  },
+  retries: { runMode: 2, openMode: 0 },
+  defaultCommandTimeout: 10000,
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
     baseUrl: 'https://opensource-demo.orangehrmlive.com/web/index.php',
-    
+    viewportWidth: 1366,
+    viewportHeight: 768,
+    setupNodeEvents(on, config) {
+      require('cypress-mochawesome-reporter/plugin')(on);
+      return config;
+    },
   },
 });
